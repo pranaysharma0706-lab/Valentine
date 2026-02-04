@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9acb, #ffc1dc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Card */
+.container {
+  background: #ffe6f1;
+  border: 4px solid black;
+  border-radius: 20px;
+  padding: 40px;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  z-index: 5;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.buttons {
+  position: relative;
+  height: 100px;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#yes {
+  background: #ff4d88;
+  color: white;
+}
+
+#no {
+  background: black;
+  color: white;
+  position: absolute;
+}
+
+/* Love section */
+#loveSection {
+  display: none;
+}
+
+#loveText {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  color: #c4005a;
+  margin-top: 15px;
+}
+
+/* Ring SVG */
+#ring {
+  width: 140px;
+  margin: 20px auto;
+}
+
+/* Mute */
+#muteBtn {
+  background: #333;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Roses */
+.rose {
+  position: fixed;
+  top: -40px;
+  font-size: 28px;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Will you be my Valentine?</h1>
+
+  <div class="buttons" id="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😜</button>
+  </div>
+
+  <div id="loveSection">
+    <div id="loveText">I love you my Sunu ❤️</div>
+
+    <!-- Custom Ring (Offline SVG – Mine) -->
+    <svg id="ring" viewBox="0 0 200 200">
+      <circle cx="100" cy="110" r="45" fill="none" stroke="#d4af37" stroke-width="10"/>
+      <polygon points="70,70 100,30 130,70" fill="#ffffff" stroke="#d4af37" stroke-width="4"/>
+      <circle cx="100" cy="45" r="10" fill="#ff69b4"/>
+    </svg>
+
+    <button id="muteBtn">Mute Music 🔇</button>
+  </div>
+</div>
+
+<!-- OFFLINE MUSIC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const buttons = document.getElementById("buttons");
+const loveSection = document.getElementById("loveSection");
+const music = document.getElementById("music");
+const muteBtn = document.getElementById("muteBtn");
+
+/* No button escape */
+noBtn.addEventListener("mouseenter", () => {
+  noBtn.style.left = Math.random() * 200 + "px";
+  noBtn.style.top = Math.random() * 80 + "px";
+});
+
+/* Yes click */
+yesBtn.addEventListener("click", () => {
+  buttons.style.display = "none";
+  loveSection.style.display = "block";
+  music.play();
+  roseShower();
+});
+
+/* Mute */
+muteBtn.addEventListener("click", () => {
+  music.muted = !music.muted;
+  muteBtn.innerText = music.muted ? "Unmute Music 🔊" : "Mute Music 🔇";
+});
+
+/* Rose shower */
+function roseShower() {
+  setInterval(() => {
+    const rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(rose);
+
+    setTimeout(() => rose.remove(), 6000);
+  }, 180);
+}
+</script>
+
+</body>
+</html>
