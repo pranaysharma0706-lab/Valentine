@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,11 +52,9 @@ body {
 
 .intro {
     position: fixed;
-
     inset: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -82,12 +82,18 @@ body {
 }
 
 .intro-content {
-    padding: 30px;
+    padding: 25px;
+    width: 100%;
+    max-width: 600px;
 }
 
-.intro-heart {
-    font-size: 80px;
 
+/* ==============================
+   INTRO HEART
+============================== */
+
+.intro-heart {
+    font-size: 65px;
     animation: heartbeat 1.2s infinite;
 }
 
@@ -103,6 +109,11 @@ body {
     }
 }
 
+
+/* ==============================
+   INTRO TITLE
+============================== */
+
 .intro h1 {
     font-family: cursive;
 
@@ -110,7 +121,7 @@ body {
 
     color: #b7193d;
 
-    margin: 10px 0;
+    margin: 5px 0 8px;
 }
 
 .intro p {
@@ -118,7 +129,57 @@ body {
 
     color: #7e3042;
 
-    margin-bottom: 28px;
+    margin-bottom: 22px;
+}
+
+
+/* ==============================
+   COUPLE PHOTO
+============================== */
+
+.couple-photo {
+    width: 230px;
+    height: 230px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    padding: 7px;
+
+    background: white;
+
+    border: 3px solid #e88ba5;
+
+    box-shadow:
+        0 0 0 8px rgba(255,255,255,0.45),
+        0 15px 40px rgba(150,20,60,0.25);
+
+    display: block;
+
+    margin: 15px auto 25px;
+
+    transition: 0.4s ease;
+
+    animation: photoFloat 3s ease-in-out infinite;
+}
+
+.couple-photo:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 0 10px rgba(255,255,255,0.5),
+        0 20px 50px rgba(150,20,60,0.35);
+}
+
+@keyframes photoFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
 }
 
 
@@ -699,6 +760,15 @@ body {
         font-size: 43px;
     }
 
+    .intro p {
+        font-size: 16px;
+    }
+
+    .couple-photo {
+        width: 190px;
+        height: 190px;
+    }
+
     .title h1 {
         font-size: 45px;
     }
@@ -775,6 +845,16 @@ body {
         <p>
             Some words are better written from the heart...
         </p>
+
+
+        <!-- COUPLE PHOTO -->
+
+        <img
+            src="us.jpg"
+            alt="Us ❤️"
+            class="couple-photo"
+        >
+
 
         <button
             class="open-btn"
@@ -1193,9 +1273,7 @@ let musicPlaying = false;
 
 function openLetter() {
 
-    /*
-       Hide opening screen
-    */
+    /* Hide opening screen */
 
     document
         .getElementById("intro")
@@ -1203,21 +1281,13 @@ function openLetter() {
         .add("hide");
 
 
-    /*
-       Get music
-    */
+    /* Get music */
 
     const music =
         document.getElementById("music");
 
 
-    /*
-       START MUSIC
-
-       Because this function is triggered
-       by the user's click, modern browsers
-       normally allow audio playback here.
-    */
+    /* Start music */
 
     music
         .play()
@@ -1257,10 +1327,6 @@ function toggleMusic() {
 
     if (musicPlaying) {
 
-        /*
-           STOP MUSIC
-        */
-
         music.pause();
 
         button.innerHTML = "🎵";
@@ -1270,10 +1336,6 @@ function toggleMusic() {
     }
 
     else {
-
-        /*
-           START MUSIC
-        */
 
         music
             .play()
@@ -1338,9 +1400,7 @@ setInterval(function () {
     container.appendChild(heart);
 
 
-    /*
-       Remove old heart
-    */
+    /* Remove old heart */
 
     setTimeout(function () {
 
@@ -1356,3 +1416,4 @@ setInterval(function () {
 
 </body>
 </html>
+```
