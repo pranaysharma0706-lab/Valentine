@@ -2,179 +2,1357 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Will You Be My Valentine?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<title>For Sunidhi ❤️</title>
 
 <style>
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9acb, #ffc1dc);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: Georgia, serif;
+
+    background:
+        radial-gradient(circle at 20% 20%,
+        rgba(255,255,255,0.9),
+        transparent 20%),
+
+        radial-gradient(circle at 80% 70%,
+        rgba(255,190,210,0.6),
+        transparent 25%),
+
+        linear-gradient(
+            135deg,
+            #ffdce5,
+            #fff1f4,
+            #ffd1df
+        );
+
+    color: #8d172d;
 }
 
-/* Card */
-.container {
-  background: #ffe6f1;
-  border: 4px solid black;
-  border-radius: 20px;
-  padding: 40px;
-  width: 360px;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-  z-index: 5;
+
+/* ==============================
+   INTRO SCREEN
+============================== */
+
+.intro {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #ffdce6 50%,
+            #ffb8cc 100%
+        );
+
+    z-index: 100;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
 }
 
-h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 42px;
-  margin-bottom: 25px;
+.intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-/* Buttons */
-.buttons {
-  position: relative;
-  height: 100px;
+.intro-content {
+    padding: 30px;
 }
 
-button {
-  padding: 12px 30px;
-  font-size: 18px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
+.intro-heart {
+    font-size: 80px;
+
+    animation: heartbeat 1.2s infinite;
 }
 
-#yes {
-  background: #ff4d88;
-  color: white;
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
 }
 
-#no {
-  background: black;
-  color: white;
-  position: absolute;
+.intro h1 {
+    font-family: cursive;
+
+    font-size: 52px;
+
+    color: #b7193d;
+
+    margin: 10px 0;
 }
 
-/* Love section */
-#loveSection {
-  display: none;
+.intro p {
+    font-size: 18px;
+
+    color: #7e3042;
+
+    margin-bottom: 28px;
 }
 
-#loveText {
-  font-family: 'Great Vibes', cursive;
-  font-size: 38px;
-  color: #c4005a;
-  margin-top: 15px;
+
+/* ==============================
+   OPEN BUTTON
+============================== */
+
+.open-btn {
+    border: none;
+
+    padding: 16px 38px;
+
+    border-radius: 40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c9184a,
+            #ef476f
+        );
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(190,20,70,0.3);
+
+    transition: 0.3s;
 }
 
-/* Ring SVG */
-#ring {
-  width: 140px;
-  margin: 20px auto;
+.open-btn:hover {
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 35px
+        rgba(190,20,70,0.4);
 }
 
-/* Mute */
-#muteBtn {
-  background: #333;
-  color: white;
-  margin-top: 10px;
+
+/* ==============================
+   FLOATING HEART CONTAINER
+============================== */
+
+.hearts {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 1;
 }
 
-/* Roses */
-.rose {
-  position: fixed;
-  top: -40px;
-  font-size: 28px;
-  animation: fall linear infinite;
-  z-index: 1;
+
+/* ==============================
+   HEART
+============================== */
+
+.heart {
+    position: absolute;
+
+    bottom: -60px;
+
+    width: 20px;
+    height: 20px;
+
+    background: #ef6685;
+
+    transform: rotate(45deg);
+
+    opacity: 0.7;
+
+    animation:
+        floatHeart
+        linear
+        infinite;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
+.heart::before,
+.heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background: #ef6685;
+
+    border-radius: 50%;
 }
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(45deg)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            rotate(405deg)
+            scale(1.2);
+
+        opacity: 0;
+    }
+}
+
+
+/* ==============================
+   BUTTERFLIES
+============================== */
+
+.butterflies {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.butterfly {
+    position: absolute;
+
+    font-size: 32px;
+
+    opacity: 0.8;
+
+    animation:
+        butterflyMove
+        14s
+        linear
+        infinite,
+
+        butterflyWing
+        0.7s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes butterflyMove {
+
+    0% {
+        transform:
+            translate(-100px, 110vh)
+            rotate(-10deg);
+    }
+
+    25% {
+        transform:
+            translate(25vw, 75vh)
+            rotate(10deg);
+    }
+
+    50% {
+        transform:
+            translate(55vw, 45vh)
+            rotate(-10deg);
+    }
+
+    75% {
+        transform:
+            translate(75vw, 25vh)
+            rotate(15deg);
+    }
+
+    100% {
+        transform:
+            translate(110vw, -100px)
+            rotate(-10deg);
+    }
+}
+
+
+@keyframes butterflyWing {
+
+    from {
+        scale: 1;
+    }
+
+    to {
+        scale: 1.12;
+    }
+}
+
+
+/* ==============================
+   MAIN WEBSITE
+============================== */
+
+.main {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        70px
+        20px;
+
+    z-index: 5;
+}
+
+
+/* ==============================
+   TITLE
+============================== */
+
+.title {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.title .small {
+    font-size: 15px;
+
+    letter-spacing: 4px;
+
+    color: #b43b58;
+}
+
+.title h1 {
+    font-family: cursive;
+
+    font-size: 65px;
+
+    color: #a50e2e;
+
+    text-shadow:
+        0 4px 10px
+        rgba(130,0,30,0.15);
+}
+
+.title p {
+    font-size: 17px;
+
+    color: #884054;
+}
+
+
+/* ==============================
+   LETTER WRAPPER
+============================== */
+
+.letter-wrapper {
+    max-width: 850px;
+
+    margin: auto;
+
+    position: relative;
+}
+
+
+/* BACK PAPER */
+
+.letter-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    inset:
+        12px
+        -8px
+        -12px
+        8px;
+
+    background: #f9b5c7;
+
+    transform: rotate(1deg);
+
+    box-shadow:
+        0 15px 35px
+        rgba(120,30,50,0.2);
+
+    z-index: -1;
+}
+
+
+/* ==============================
+   LETTER
+============================== */
+
+.letter {
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.5),
+            rgba(255,255,255,0.5)
+        ),
+        #fff4f5;
+
+    padding:
+        65px
+        75px;
+
+    border:
+        1px solid
+        #f1a9b9;
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(120,30,50,0.2),
+
+        inset 0 0 50px
+        rgba(255,180,200,0.25);
+
+    transform: rotate(-0.4deg);
+
+    overflow: hidden;
+}
+
+
+/* INNER BORDER */
+
+.letter::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 15px;
+
+    border:
+        2px solid
+        rgba(219,75,105,0.25);
+
+    pointer-events: none;
+}
+
+
+/* ==============================
+   CORNER HEARTS
+============================== */
+
+.corner {
+    position: absolute;
+
+    font-size: 35px;
+
+    opacity: 0.7;
+}
+
+.corner.one {
+    top: 25px;
+    left: 25px;
+}
+
+.corner.two {
+    top: 25px;
+    right: 25px;
+}
+
+.corner.three {
+    bottom: 25px;
+    left: 25px;
+}
+
+.corner.four {
+    bottom: 25px;
+    right: 25px;
+}
+
+
+/* ==============================
+   LOVE HEADING
+============================== */
+
+.love-heading {
+    text-align: center;
+
+    font-family: cursive;
+
+    font-size: 65px;
+
+    color: #a50e2e;
+
+    margin-bottom: 30px;
+}
+
+.love-heading span {
+    font-size: 28px;
+}
+
+
+/* ==============================
+   LETTER TEXT
+============================== */
+
+.letter-content {
+    position: relative;
+
+    z-index: 2;
+
+    color: #9d1935;
+
+    line-height: 1.9;
+
+    font-size: 19px;
+
+    font-family:
+        "Segoe Print",
+        "Comic Sans MS",
+        cursive;
+}
+
+.greeting {
+    font-size: 24px;
+
+    margin-bottom: 20px;
+}
+
+.letter-content p {
+    margin-bottom: 18px;
+}
+
+
+/* ==============================
+   HIGHLIGHT TEXT
+============================== */
+
+.highlight {
+    font-size: 22px;
+
+    text-align: center;
+
+    margin:
+        30px
+        0;
+
+    color: #b7193d;
+}
+
+
+/* ==============================
+   DECORATION
+============================== */
+
+.decor {
+    text-align: center;
+
+    margin:
+        30px
+        0;
+
+    font-size: 25px;
+
+    letter-spacing: 8px;
+}
+
+
+/* ==============================
+   SIGNATURE
+============================== */
+
+.signature {
+    text-align: right;
+
+    margin-top: 40px;
+
+    font-family: cursive;
+
+    font-size: 27px;
+
+    color: #a50e2e;
+}
+
+.signature .name {
+    font-size: 35px;
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    text-align: center;
+
+    margin-top: 45px;
+
+    color: #8b3d51;
+
+    font-family: cursive;
+
+    font-size: 20px;
+}
+
+
+/* ==============================
+   MUSIC BUTTON
+============================== */
+
+.music-btn {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #b7193d;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(120,0,30,0.3);
+
+    z-index: 50;
+
+    transition: 0.3s;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 700px) {
+
+    .main {
+        padding:
+            40px
+            12px;
+    }
+
+    .intro h1 {
+        font-size: 43px;
+    }
+
+    .title h1 {
+        font-size: 45px;
+    }
+
+    .letter {
+        padding:
+            55px
+            30px;
+    }
+
+    .love-heading {
+        font-size: 48px;
+    }
+
+    .letter-content {
+        font-size: 16px;
+
+        line-height: 1.8;
+    }
+
+    .greeting {
+        font-size: 21px;
+    }
+
+    .signature {
+        font-size: 23px;
+    }
+
+    .signature .name {
+        font-size: 30px;
+    }
+
+}
+
+
+/* ==============================
+   REDUCED MOTION
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div class="container">
-  <h1>Will you be my Valentine?</h1>
 
-  <div class="buttons" id="buttons">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 😜</button>
-  </div>
+<!-- ==================================================
+     INTRO SCREEN
+================================================== -->
 
-  <div id="loveSection">
-    <div id="loveText">I love you my Sunu ❤️</div>
+<div class="intro" id="intro">
 
-    <!-- Custom Ring (Offline SVG – Mine) -->
-    <svg id="ring" viewBox="0 0 200 200">
-      <circle cx="100" cy="110" r="45" fill="none" stroke="#d4af37" stroke-width="10"/>
-      <polygon points="70,70 100,30 130,70" fill="#ffffff" stroke="#d4af37" stroke-width="4"/>
-      <circle cx="100" cy="45" r="10" fill="#ff69b4"/>
-    </svg>
+    <div class="intro-content">
 
-    <button id="muteBtn">Mute Music 🔇</button>
-  </div>
+        <div class="intro-heart">
+            ❤️
+        </div>
+
+        <h1>
+            For Sunidhi
+        </h1>
+
+        <p>
+            Some words are better written from the heart...
+        </p>
+
+        <button
+            class="open-btn"
+            onclick="openLetter()">
+
+            💌 Open My Letter
+
+        </button>
+
+    </div>
+
 </div>
 
-<!-- OFFLINE MUSIC -->
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+
+
+<!-- ==================================================
+     FLOATING HEARTS
+================================================== -->
+
+<div class="hearts">
+
+    <div
+        class="heart"
+        style="
+        left:5%;
+        animation-duration:10s;
+        animation-delay:1s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:15%;
+        animation-duration:13s;
+        animation-delay:3s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:25%;
+        animation-duration:9s;
+        animation-delay:0s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:38%;
+        animation-duration:12s;
+        animation-delay:4s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:50%;
+        animation-duration:10s;
+        animation-delay:2s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:62%;
+        animation-duration:14s;
+        animation-delay:1s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:73%;
+        animation-duration:11s;
+        animation-delay:5s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:85%;
+        animation-duration:9s;
+        animation-delay:2s;
+        ">
+    </div>
+
+    <div
+        class="heart"
+        style="
+        left:95%;
+        animation-duration:13s;
+        animation-delay:0s;
+        ">
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     BUTTERFLIES
+================================================== -->
+
+<div class="butterflies">
+
+    <div
+        class="butterfly"
+        style="
+        top:80%;
+        left:-5%;
+        animation-delay:1s;
+        ">
+        🦋
+    </div>
+
+    <div
+        class="butterfly"
+        style="
+        top:55%;
+        left:20%;
+        animation-delay:4s;
+        ">
+        🦋
+    </div>
+
+    <div
+        class="butterfly"
+        style="
+        top:75%;
+        left:50%;
+        animation-delay:7s;
+        ">
+        🦋
+    </div>
+
+    <div
+        class="butterfly"
+        style="
+        top:35%;
+        left:70%;
+        animation-delay:2s;
+        ">
+        🦋
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     MAIN WEBSITE
+================================================== -->
+
+<main class="main">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <div class="small">
+            A LETTER FROM MY HEART
+        </div>
+
+        <h1>
+            For You ❤️
+        </h1>
+
+        <p>
+            Because some feelings deserve to be written.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LETTER
+    ================================================== -->
+
+    <div class="letter-wrapper">
+
+        <div class="letter">
+
+
+            <!-- CORNER DECORATIONS -->
+
+            <div class="corner one">
+                ♡
+            </div>
+
+            <div class="corner two">
+                ♥
+            </div>
+
+            <div class="corner three">
+                ♡
+            </div>
+
+            <div class="corner four">
+                ♥
+            </div>
+
+
+
+            <!-- HEADING -->
+
+            <div class="love-heading">
+
+                Love
+
+                <span>
+                    ♥
+                </span>
+
+            </div>
+
+
+
+            <!-- LETTER -->
+
+            <div class="letter-content">
+
+
+                <div class="greeting">
+                    Dear Sunidhi,
+                </div>
+
+
+                <p>
+                    You know what? You are special to me.
+                    Not because I want to impress you or get
+                    something from you in any form, but simply
+                    because <strong>you matter to me.</strong>
+                </p>
+
+
+                <p>
+                    I know we have had our fights, our arguments,
+                    our misunderstandings and moments when we
+                    both became angry. But despite all of that,
+                    one thing has always remained the same —
+                    <strong>the respect and love I have for you.</strong>
+                </p>
+
+
+                <p>
+                    I respect you a lot. I never wanted our
+                    relationship to be about physical needs or
+                    anything close to that. For me, love is about
+                    understanding, caring, respecting and standing
+                    beside the person who truly matters.
+                </p>
+
+
+                <div class="highlight">
+                    And honestly... you are the one I want. ❤️
+                </div>
+
+
+                <p>
+                    I love you because you were the first person
+                    to come into my life and introduce me to what
+                    love really feels like.
+                </p>
+
+
+                <p>
+                    You showed me how beautiful it can be to care
+                    for someone, to miss someone, to worry about
+                    someone and to simply want that person to be okay.
+                </p>
+
+
+                <p>
+                    Yesterday, when you were angry and said that
+                    I am a burden to my parents, I know there was
+                    anger behind those words. Maybe you were right
+                    about some things, and I understand that.
+                </p>
+
+
+                <p>
+                    I know I still have a lot to improve in my life.
+                    I am trying. I want to become better, stronger
+                    and more responsible — not just for myself,
+                    but also for the people I love.
+                </p>
+
+
+                <p>
+                    And yes, <strong>Pranika is my friend.</strong>
+                    Just a good friend. I really want you to
+                    understand that there is nothing more behind it.
+                </p>
+
+
+                <p>
+                    Please don't let misunderstandings become bigger
+                    than the love and friendship we share.
+                </p>
+
+
+
+                <!-- DECORATION -->
+
+                <div class="decor">
+                    ♡ ✦ ♥ ✦ ♡
+                </div>
+
+
+
+                <!-- APOLOGY -->
+
+                <div class="highlight">
+                    I am sorry. ❤️
+                </div>
+
+
+                <p style="text-align:center;">
+
+                    Please understand me.<br>
+
+                    Please forgive me.<br>
+
+                    And whenever you feel ready...
+
+                </p>
+
+
+
+                <!-- SIGNATURE -->
+
+                <div class="signature">
+
+                    Love you a lot,
+
+                    <div class="name">
+                        Pranay ❤️
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Made with love, just for you. 🦋❤️
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     MUSIC BUTTON
+================================================== -->
+
+<button
+    class="music-btn"
+    onclick="toggleMusic()"
+    id="musicButton">
+
+    🎵
+
+</button>
+
+
+
+<!-- ==================================================
+     MUSIC
+================================================== -->
+
+<audio
+    id="music"
+    loop>
+
+    <source
+        src="love-song.mp3"
+        type="audio/mpeg">
+
 </audio>
 
+
+
 <script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const buttons = document.getElementById("buttons");
-const loveSection = document.getElementById("loveSection");
-const music = document.getElementById("music");
-const muteBtn = document.getElementById("muteBtn");
 
-/* No button escape */
-noBtn.addEventListener("mouseenter", () => {
-  noBtn.style.left = Math.random() * 200 + "px";
-  noBtn.style.top = Math.random() * 80 + "px";
-});
+/* ==================================================
+   MUSIC STATUS
+================================================== */
 
-/* Yes click */
-yesBtn.addEventListener("click", () => {
-  buttons.style.display = "none";
-  loveSection.style.display = "block";
-  music.play();
-  roseShower();
-});
+let musicPlaying = false;
 
-/* Mute */
-muteBtn.addEventListener("click", () => {
-  music.muted = !music.muted;
-  muteBtn.innerText = music.muted ? "Unmute Music 🔊" : "Mute Music 🔇";
-});
 
-/* Rose shower */
-function roseShower() {
-  setInterval(() => {
-    const rose = document.createElement("div");
-    rose.className = "rose";
-    rose.innerHTML = "🌹";
-    rose.style.left = Math.random() * 100 + "vw";
-    rose.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(rose);
+/* ==================================================
+   OPEN LETTER + START MUSIC
+================================================== */
 
-    setTimeout(() => rose.remove(), 6000);
-  }, 180);
+function openLetter() {
+
+    /*
+       Hide opening screen
+    */
+
+    document
+        .getElementById("intro")
+        .classList
+        .add("hide");
+
+
+    /*
+       Get music
+    */
+
+    const music =
+        document.getElementById("music");
+
+
+    /*
+       START MUSIC
+
+       Because this function is triggered
+       by the user's click, modern browsers
+       normally allow audio playback here.
+    */
+
+    music
+        .play()
+        .then(function () {
+
+            musicPlaying = true;
+
+            document
+                .getElementById("musicButton")
+                .innerHTML = "🔊";
+
+        })
+        .catch(function (error) {
+
+            console.log(
+                "Music could not start:",
+                error
+            );
+
+        });
+
 }
+
+
+/* ==================================================
+   MUSIC ON / OFF BUTTON
+================================================== */
+
+function toggleMusic() {
+
+    const music =
+        document.getElementById("music");
+
+    const button =
+        document.getElementById("musicButton");
+
+
+    if (musicPlaying) {
+
+        /*
+           STOP MUSIC
+        */
+
+        music.pause();
+
+        button.innerHTML = "🎵";
+
+        musicPlaying = false;
+
+    }
+
+    else {
+
+        /*
+           START MUSIC
+        */
+
+        music
+            .play()
+            .then(function () {
+
+                button.innerHTML = "🔊";
+
+                musicPlaying = true;
+
+            })
+            .catch(function (error) {
+
+                console.log(
+                    "Music could not start:",
+                    error
+                );
+
+            });
+
+    }
+
+}
+
+
+/* ==================================================
+   CREATE EXTRA RANDOM HEARTS
+================================================== */
+
+setInterval(function () {
+
+    const container =
+        document.querySelector(".hearts");
+
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className = "heart";
+
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+
+    heart.style.animationDuration =
+        (8 + Math.random() * 7) + "s";
+
+
+    const size =
+        10 + Math.random() * 18;
+
+
+    heart.style.width =
+        size + "px";
+
+
+    heart.style.height =
+        size + "px";
+
+
+    container.appendChild(heart);
+
+
+    /*
+       Remove old heart
+    */
+
+    setTimeout(function () {
+
+        heart.remove();
+
+    }, 15000);
+
+
+}, 900);
+
 </script>
+
 
 </body>
 </html>
